@@ -1,11 +1,14 @@
+using System.IO;
+using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class DataManager : MonoBehaviour
 {
     public static DataManager instance;
+    public TMP_InputField nameInput;
 
     public int highScore;
+    public string highName;
     public string playerName;
 
     private void Awake()
@@ -19,6 +22,7 @@ public class DataManager : MonoBehaviour
         // Set persistant datamanager during gameplay
         instance = this;
         DontDestroyOnLoad(gameObject);
+        LoadGame();
     }
 
     // Set high score and name after game over
@@ -27,26 +31,43 @@ public class DataManager : MonoBehaviour
         if (highScore < score)
         {
             highScore = score;
-            playerName = name;
+            highName = name;
         }
+    }
+
+    public void GetPlayerName()
+    {
+        playerName = nameInput.text;
     }
 
     [System.Serializable]
     class SaveData
     {
         public int highScore;
-        public string playerName;
+        public string highName;
     }
 
     // Save the high score and player name on exit
     public void SaveGame()
     {
+        SaveData data = new SaveData();
+        data.highScore = highScore;
+        data.highName = highName;
 
+        string json = JsonUtility.ToJson(data);
+        File.WriteAllText(Application.persistentDataPath + "/save.json", json);
     }
 
     // Load the high score and player name on start
     public void LoadGame()
     {
+        if (File.Exists(Application.persistentDataPath + "/save.json"))
+        {
+            string json = File.ReadAllText(Application.persistentDataPath + "/save.json");
+            SaveData data = JsonUtility.FromJson<SaveData>(json);
 
+            highScore = data.highScore;
+            highName = data.highName;
+        }
     }
 }
