@@ -11,6 +11,9 @@ public class UIHandler : MonoBehaviour
 {
     public TextMeshProUGUI nameCheckText;
     public TextMeshProUGUI highScoreText;
+    public TMP_InputField nameInput;
+
+    public string playerName;
 
     private void Start()
     {
@@ -18,6 +21,7 @@ public class UIHandler : MonoBehaviour
         {
             highScoreText.text = $"High Score : {DataManager.instance.highName} : {DataManager.instance.highScore}";
         }
+        DataManager.instance.playerName = "";
     }
 
     public void StartGame()
@@ -47,5 +51,11 @@ public class UIHandler : MonoBehaviour
         nameCheckText.gameObject.SetActive(true);
         yield return new WaitForSeconds(5);
         nameCheckText.gameObject.SetActive(false);
+    }
+
+    public void GetPlayerName()
+    {
+        playerName = nameInput.text;
+        DataManager.instance.playerName = playerName;
     }
 }

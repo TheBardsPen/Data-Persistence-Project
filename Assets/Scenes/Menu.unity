@@ -298,6 +298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameInput: {fileID: 1947142917}
   highScore: 0
+  highName: 
   playerName: 
 --- !u!1 &554497187
 GameObject:
@@ -1476,6 +1477,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameCheckText: {fileID: 1886077220}
   highScoreText: {fileID: 1159645516}
+  nameInput: {fileID: 1947142917}
+  playerName: 
 --- !u!1 &1886077218
 GameObject:
   m_ObjectHideFlags: 0
@@ -1713,8 +1716,8 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 396769138}
-        m_TargetAssemblyTypeName: DataManager, Assembly-CSharp
+      - m_Target: {fileID: 1853417937}
+        m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
         m_MethodName: GetPlayerName
         m_Mode: 1
         m_Arguments:

@@ -35,11 +35,6 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    public void GetPlayerName()
-    {
-        playerName = nameInput.text;
-    }
-
     [System.Serializable]
     class SaveData
     {
